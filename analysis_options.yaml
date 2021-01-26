@@ -3,6 +3,7 @@ analyzer:
   - "**/*.g.dart"
   - "**/*.freezed.dart"
   - "bin/cache/**"
+  - "lib/generated/**"
   - "lib/i18n/messages_*.dart"
   - "lib/src/http/**"
   - "test_fixes/**"
@@ -22,7 +23,7 @@ linter:
     - always_require_non_null_named_parameters
     - annotate_overrides
     - avoid_bool_literals_in_conditional_expressions
-    - avoid_classes_with_only_static_members
+    # - avoid_classes_with_only_static_members
     - avoid_empty_else
     - avoid_equals_and_hash_code_on_mutable_classes
     - avoid_field_initializers_in_const_classes
@@ -68,10 +69,10 @@ linter:
     - prefer_asserts_in_initializer_lists
     - prefer_collection_literals
     - prefer_conditional_assignment
-    - prefer_const_constructors
+    # - prefer_const_constructors
     - prefer_const_constructors_in_immutables
     - prefer_const_declarations
-    - prefer_const_literals_to_create_immutables
+    # - prefer_const_literals_to_create_immutables
     - prefer_contains
     - prefer_equal_for_default_values
     - prefer_final_fields
@@ -94,7 +95,7 @@ linter:
     - prefer_void_to_null
     - recursive_getters
     - slash_for_doc_comments
-    - sort_constructors_first
+    # - sort_constructors_first
     - sort_unnamed_constructors_first
     - test_types_in_equals
     - throw_in_finally
