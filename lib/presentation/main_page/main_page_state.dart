@@ -1,3 +1,4 @@
+import 'package:clashroyalestats/domain/player/models/player.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'main_page_state.freezed.dart';
@@ -7,4 +8,10 @@ abstract class MainPageState with _$MainPageState {
   const factory MainPageState.showLoading() = MainPageStateShowLoading;
 
   const factory MainPageState.idle() = MainPageStateIdle;
+
+  const factory MainPageState.searchPlayerSuccess(Player player) =
+      MainPageStateSearchPlayerSuccess;
+
+  const factory MainPageState.searchPlayerFailure(Exception exception) =
+      MainPageStateSearchPlayerFailure;
 }
