@@ -8,5 +8,5 @@ class GetPlayerUseCase {
 
   GetPlayerUseCase(this._repository);
 
-  Future<Player> invoke(String playerTag) => _repository.fetch('#2P8V8Y998');
+  Future<Player> call(String playerTag) => _repository.fetch(playerTag);
 }

@@ -9,12 +9,9 @@ class LoadingScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(
-        title: 'CRStats',
-      ),
-      body: Container(
-        color: AppColors.white,
-        alignment: Alignment.center,
+      backgroundColor: AppColors.white,
+      appBar: CustomAppBar(title: 'CRStats'),
+      body: Center(
         child: CustomCircularProgressIndicator(),
       ),
     );

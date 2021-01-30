@@ -6,44 +6,24 @@ import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final String hint;
-  final bool hasSuffixIcon;
-  final Widget suffixIcon;
-  final Function onSuffixIconTap;
+  final Function(String) onSubmitted;
+  final Function(String) onChanged;
+  final TextInputAction textInputAction;
 
   const CustomTextField({
     @required this.controller,
     this.hint = '',
-    this.hasSuffixIcon = false,
-    this.suffixIcon,
-    this.onSuffixIconTap,
+    this.onSubmitted,
+    this.onChanged,
+    this.textInputAction = TextInputAction.done,
     Key key,
   })  : assert(controller != null),
         super(key: key);
 
-  factory CustomTextField.withClearButton({
-    @required TextEditingController controller,
-    @required Function onSuffixIconTap,
-    bool hasSuffixIcon = true,
-    String hint,
-  }) {
-    return CustomTextField(
-      controller: controller,
-      hint: hint,
-      hasSuffixIcon: hasSuffixIcon,
-      suffixIcon: Icon(
-        Icons.close,
-        color: AppColors.primary,
-      ),
-      onSuffixIconTap: onSuffixIconTap,
-    );
-  }
-
   InputBorder get _inputBorder {
     return OutlineInputBorder(
       borderRadius: BorderRadius.all(
-        Radius.circular(
-          Dimens.xxxl,
-        ),
+        Radius.circular(Dimens.xxxl),
       ),
       borderSide: BorderSide(
         color: AppColors.transparent,
@@ -59,6 +39,9 @@ class CustomTextField extends StatelessWidget {
       shadowColor: AppColors.dark,
       child: TextField(
         controller: controller,
+        onChanged: onChanged?.call,
+        onSubmitted: onSubmitted?.call,
+        textInputAction: textInputAction,
         autocorrect: false,
         enableSuggestions: false,
         cursorColor: AppColors.primary,
@@ -66,26 +49,13 @@ class CustomTextField extends StatelessWidget {
         decoration: InputDecoration(
           filled: true,
           fillColor: AppColors.white,
-          contentPadding: EdgeInsets.symmetric(
-            horizontal: Dimens.s,
-          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: Dimens.s),
           hintText: hint,
           hintStyle: TextStyles.medium14Dark50,
           focusedBorder: _inputBorder,
           enabledBorder: _inputBorder,
-          suffixIcon: _suffixIcon(),
         ),
       ),
     );
-  }
-
-  Widget _suffixIcon() {
-    if (hasSuffixIcon && suffixIcon != null) {
-      return GestureDetector(
-        onTap: onSuffixIconTap?.call,
-        child: suffixIcon,
-      );
-    }
-    return SizedBox();
   }
 }

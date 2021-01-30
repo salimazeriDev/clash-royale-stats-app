@@ -3,20 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class SearchBar extends HookWidget {
+  final Function(String) onChanged;
+  final Function(String) onSubmitted;
+
   const SearchBar({
+    this.onChanged,
+    this.onSubmitted,
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
-    useListenable(controller);
 
-    return CustomTextField.withClearButton(
+    return CustomTextField(
       controller: controller,
-      onSuffixIconTap: controller.clear,
-      hasSuffixIcon: controller.text.isNotEmpty,
       hint: 'Find player or clan',
+      onChanged: onChanged?.call,
+      onSubmitted: onSubmitted?.call,
     );
   }
 }
