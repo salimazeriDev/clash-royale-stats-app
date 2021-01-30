@@ -4,7 +4,6 @@ import 'package:clashroyalestats/presentation/main_page/main_page_cubit.dart';
 import 'package:clashroyalestats/presentation/main_page/main_page_state.dart';
 import 'package:clashroyalestats/presentation/widgets/custom_app_bar.dart';
 import 'package:clashroyalestats/presentation/widgets/custom_bottom_nav_bar.dart';
-import 'package:clashroyalestats/presentation/widgets/custom_text_field.dart';
 import 'package:clashroyalestats/presentation/widgets/loading_scaffold.dart';
 import 'package:clashroyalestats/presentation/widgets/search_bar.dart';
 import 'package:clashroyalestats/style/dimens.dart';
@@ -21,10 +20,24 @@ class MainPage extends HookWidget {
     return state is MainPageStateShowLoading || state is MainPageStateIdle;
   }
 
+  bool _shouldListen(MainPageState state) {
+    return state is MainPageStateSearchPlayerFailure ||
+        state is MainPageStateSearchPlayerSuccess;
+  }
+
+  void _cubitListener(MainPageState state, BuildContext context) {
+    state.maybeWhen(
+      searchPlayerSuccess: (player) => print,
+      searchPlayerFailure: (e) => print,
+      orElse: () {},
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final cubit = useCubit<MainPageCubit>();
     final state = useCubitBuilder(cubit, buildWhen: _shouldBuild);
+    useCubitListener(cubit, _cubitListener, listenWhen: _shouldListen);
 
     useEffect(() {
       cubit.init();
@@ -32,36 +45,35 @@ class MainPage extends HookWidget {
     }, [cubit]);
 
     return state.maybeWhen(
-      idle: () => _MainPageContent(),
+      idle: () => _MainPageContent(cubit: cubit),
       showLoading: () => LoadingScaffold(),
-      orElse: () => SizedBox(),
+      orElse: () => const SizedBox(),
     );
   }
 }
 
 class _MainPageContent extends StatelessWidget {
+  final MainPageCubit cubit;
+
   const _MainPageContent({
+    @required this.cubit,
     Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(
-          title: 'CRStats',
-        ),
+        appBar: CustomAppBar(title: 'CRStats'),
         bottomNavigationBar: CustomBottomNavBar(),
         body: SafeArea(
           child: Column(
             children: [
-              SizedBox(
-                height: Dimens.m,
-              ),
+              SizedBox(height: Dimens.m),
               Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: Dimens.s,
+                padding: EdgeInsets.symmetric(horizontal: Dimens.s),
+                child: SearchBar(
+                  onSubmitted: cubit.searchPlayer,
                 ),
-                child: SearchBar(),
               ),
             ],
           ),

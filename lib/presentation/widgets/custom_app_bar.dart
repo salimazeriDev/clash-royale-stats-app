@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   final String title;
   final TextStyle titleStyle;
+  final Brightness brightness;
 
   const CustomAppBar({
     this.title = '',
     this.titleStyle = TextStyles.bold20Dark,
+    this.brightness = Brightness.light,
     Key key,
   }) : super(key: key);
 
@@ -19,7 +21,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      brightness: Brightness.light,
+      brightness: brightness,
       backgroundColor: AppColors.white,
       automaticallyImplyLeading: false,
       elevation: Dimens.elevation,
