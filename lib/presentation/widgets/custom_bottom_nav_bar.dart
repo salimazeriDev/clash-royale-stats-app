@@ -8,6 +8,11 @@ class CustomBottomNavBar extends StatelessWidget {
     Key key,
   }) : super(key: key);
 
+  double _bottomPadding(BuildContext context) {
+    final _bottomPadding = MediaQuery.of(context).padding.bottom;
+    return _bottomPadding >= _contentPadding ? _bottomPadding : _contentPadding;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -15,33 +20,26 @@ class CustomBottomNavBar extends StatelessWidget {
         left: _contentPadding,
         right: _contentPadding,
         top: _contentPadding,
-        bottom: _bottom(context),
+        bottom: _bottomPadding(context),
       ),
-      decoration: BoxDecoration(
-        color: Colors.grey,
-      ),
+      decoration: BoxDecoration(color: Colors.grey),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           FlatButton(
-            onPressed: () => null,
+            onPressed: () {},
             child: Text('profile'),
           ),
           FlatButton(
-            onPressed: () => null,
+            onPressed: () {},
             child: Text('decks'),
           ),
           FlatButton(
-            onPressed: () => null,
+            onPressed: () {},
             child: Text('cards'),
           ),
         ],
       ),
     );
-  }
-
-  double _bottom(BuildContext context) {
-    final _bottomPadding = MediaQuery.of(context).padding.bottom;
-    return _bottomPadding >= _contentPadding ? _bottomPadding : _contentPadding;
   }
 }
