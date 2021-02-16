@@ -9,14 +9,14 @@ import 'package:clashroyalestats/infrastructure/player/dtos/player_dto.dart';
 import 'package:clashroyalestats/infrastructure/player/mappers/achievement_dto_mapper.dart';
 import 'package:clashroyalestats/infrastructure/player/mappers/arena_dto_mapper.dart';
 import 'package:clashroyalestats/infrastructure/player/mappers/badge_dto_mapper.dart';
-import 'package:clashroyalestats/infrastructure/player/mappers/clan_dto_mapper.dart';
+import 'package:clashroyalestats/infrastructure/player/mappers/clan_info_dto_mapper.dart';
 import 'package:clashroyalestats/infrastructure/player/mappers/league_statistics_dto_mapper.dart';
 import 'package:clashroyalestats/infrastructure/player/mappers/player_card_dto_mapper.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class PlayerDtoMapper extends DataMapper<PlayerDto, Player> {
-  final ClanDtoMapper _clanDtoMapper;
+  final ClanInfoDtoMapper _clanInfoDtoMapper;
   final ArenaDtoMapper _arenaDtoMapper;
   final LeagueStatisticsDtoMapper _leagueStatisticsDtoMapper;
   final BadgeDtoMapper _badgeDtoMapper;
@@ -25,7 +25,7 @@ class PlayerDtoMapper extends DataMapper<PlayerDto, Player> {
   final GameCardDtoMapper _gameCardDtoMapper;
 
   PlayerDtoMapper(
-    this._clanDtoMapper,
+    this._clanInfoDtoMapper,
     this._arenaDtoMapper,
     this._leagueStatisticsDtoMapper,
     this._badgeDtoMapper,
@@ -56,7 +56,7 @@ class PlayerDtoMapper extends DataMapper<PlayerDto, Player> {
       totalDonations: data.totalDonations,
       warDayWins: data.warDayWins,
       clanCardsCollected: data.clanCardsCollected,
-      clan: _clanDtoMapper.apply(data.clan),
+      clan: _clanInfoDtoMapper.apply(data.clan),
       arena: _arenaDtoMapper.apply(data.arena),
       leagueStatistics: _leagueStatisticsDtoMapper.apply(data.leagueStatistics),
       badges: _applyBadges(data),

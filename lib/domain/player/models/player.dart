@@ -2,7 +2,7 @@ import 'package:clashroyalestats/domain/game_cards/models/game_card.dart';
 import 'package:clashroyalestats/domain/player/models/achievement.dart';
 import 'package:clashroyalestats/domain/player/models/arena.dart';
 import 'package:clashroyalestats/domain/player/models/badge.dart';
-import 'package:clashroyalestats/domain/player/models/clan.dart';
+import 'package:clashroyalestats/domain/player/models/clan_info.dart';
 import 'package:clashroyalestats/domain/player/models/league_statistics.dart';
 import 'package:clashroyalestats/domain/player/models/player_card.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -31,7 +31,7 @@ abstract class Player with _$Player {
     int totalDonations,
     int warDayWins,
     int clanCardsCollected,
-    Clan clan,
+    ClanInfo clan,
     Arena arena,
     LeagueStatistics leagueStatistics,
     List<Badge> badges,
