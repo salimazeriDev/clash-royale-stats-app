@@ -12,6 +12,6 @@ abstract class PlayerDataSource {
   @factoryMethod
   factory PlayerDataSource(Dio dio) = _PlayerDataSource;
 
-  @GET(NetworkConfiguration.players)
+  @GET(NetworkConfiguration.player)
   Future<PlayerDto> fetch(@Path() String playerTag);
 }

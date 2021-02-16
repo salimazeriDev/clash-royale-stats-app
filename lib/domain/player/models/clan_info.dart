@@ -1,12 +1,12 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'clan.freezed.dart';
+part 'clan_info.freezed.dart';
 
 @freezed
-abstract class Clan with _$Clan {
-  factory Clan({
+abstract class ClanInfo with _$ClanInfo {
+  factory ClanInfo({
     String tag,
     String name,
     int badgeId,
-  }) = _Clan;
+  }) = _ClanInfo;
 }
