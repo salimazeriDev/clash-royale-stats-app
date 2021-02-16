@@ -2,7 +2,7 @@ import 'package:clashroyalestats/infrastructure/game_cards/dtos/game_card_dto.da
 import 'package:clashroyalestats/infrastructure/player/dtos/achievement_dto.dart';
 import 'package:clashroyalestats/infrastructure/player/dtos/arena_dto.dart';
 import 'package:clashroyalestats/infrastructure/player/dtos/badge_dto.dart';
-import 'package:clashroyalestats/infrastructure/player/dtos/clan_dto.dart';
+import 'package:clashroyalestats/infrastructure/player/dtos/clan_info_dto.dart';
 import 'package:clashroyalestats/infrastructure/player/dtos/league_statistics_dto.dart';
 import 'package:clashroyalestats/infrastructure/player/dtos/player_card_dto.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -32,7 +32,7 @@ abstract class PlayerDto with _$PlayerDto {
     int totalDonations,
     int warDayWins,
     int clanCardsCollected,
-    ClanDto clan,
+    ClanInfoDto clan,
     ArenaDto arena,
     LeagueStatisticsDto leagueStatistics,
     List<BadgeDto> badges,

@@ -21,14 +21,14 @@ class MainPage extends HookWidget {
   }
 
   bool _shouldListen(MainPageState state) {
-    return state is MainPageStateSearchPlayerFailure ||
-        state is MainPageStateSearchPlayerSuccess;
+    return state is MainPageStateSearchFailure ||
+        state is MainPageStateSearchSuccess;
   }
 
   void _cubitListener(MainPageState state, BuildContext context) {
     state.maybeWhen(
-      searchPlayerSuccess: (player) => print,
-      searchPlayerFailure: (e) => print,
+      searchSuccess: (player, clan) => print,
+      searchFailure: (e) => print,
       orElse: () {},
     );
   }
@@ -72,7 +72,7 @@ class _MainPageContent extends StatelessWidget {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Dimens.s),
                 child: SearchBar(
-                  onSubmitted: cubit.searchPlayer,
+                  onSubmitted: cubit.searchPlayerOrClan,
                 ),
               ),
             ],

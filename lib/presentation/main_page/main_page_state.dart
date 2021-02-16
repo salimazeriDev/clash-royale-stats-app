@@ -1,3 +1,4 @@
+import 'package:clashroyalestats/domain/clan/models/clan.dart';
 import 'package:clashroyalestats/domain/player/models/player.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -9,9 +10,11 @@ abstract class MainPageState with _$MainPageState {
 
   const factory MainPageState.idle() = MainPageStateIdle;
 
-  const factory MainPageState.searchPlayerSuccess(Player player) =
-      MainPageStateSearchPlayerSuccess;
+  const factory MainPageState.searchSuccess({
+    Player player,
+    Clan clan,
+  }) = MainPageStateSearchSuccess;
 
-  const factory MainPageState.searchPlayerFailure(Exception exception) =
-      MainPageStateSearchPlayerFailure;
+  const factory MainPageState.searchFailure(Exception exception) =
+      MainPageStateSearchFailure;
 }
